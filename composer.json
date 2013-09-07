@@ -1,0 +1,30 @@
+{
+    "name": "phatshambler/laravel-fremkit",
+    "description": "Laravel helper classes and stuff",
+    "keywords": ["laravel", "helper", "wip"],
+    "homepage": "http://github.com/phatshambler/laravel-fremkit",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nicolas Roy",
+            "email": "phatshambler@gmail.com",
+            "homepage": "..."
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+    },
+    "suggest": {
+    },
+    "autoload": {
+        "psr-0": {"Fremkit": "src/"}
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x"
+        }
+    }
+}
