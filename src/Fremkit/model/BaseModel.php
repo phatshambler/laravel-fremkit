@@ -5,9 +5,9 @@
 *   Base Model (extend this)
 *
 **/
-use Illuminate\Database\Eloquent;
+use Illuminate\Database\Eloquent\Model;
 
-class BaseModel extends Eloquent
+class BaseModel extends Model
 {
 
     /**
