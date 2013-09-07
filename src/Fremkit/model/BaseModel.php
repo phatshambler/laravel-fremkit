@@ -1,4 +1,4 @@
-<?php namespace Niko\Model;
+<?php namespace Fremkit\Model;
 
 /**
 *

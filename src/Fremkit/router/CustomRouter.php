@@ -1,4 +1,4 @@
-<?php namespace Niko\Router;
+<?php namespace Fremkit\Router;
 
 class CustomRouter extends \Illuminate\Routing\Router {
 

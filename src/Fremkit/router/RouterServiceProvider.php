@@ -1,4 +1,4 @@
-<?php namespace Niko\Router;
+<?php namespace Fremkit\Router;
 
 use Illuminate\Support\ServiceProvider;
 

@@ -1,4 +1,4 @@
-<?php namespace Niko\Controller;
+<?php namespace Fremkit\Controller;
 
 /**
 *

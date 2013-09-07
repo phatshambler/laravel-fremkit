@@ -1,4 +1,4 @@
-<?php namespace Niko\Observers;
+<?php namespace Fremkit\Observers;
 
 class OrderReverseObserver extends MetaOrderObserver {
 
