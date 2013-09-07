@@ -22,12 +22,7 @@
     "suggest": {
     },
     "autoload": {
-        "psr-0": {
-            "Fremkit\\Router\\": "src/Fremkit/router/",
-            "Fremkit\\Observers\\": "src/Fremkit/observers/",
-            "Fremkit\\Model\\": "src/Fremkit/model/",
-            "Fremkit\\Controller\\": "src/Fremkit/controller/"
-        }
+         "classmap": ["src/"]
     },
     "extra": {
         "branch-alias": {
