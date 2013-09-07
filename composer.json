@@ -24,7 +24,7 @@
             "Fremkit\\Router": "src/Fremkit/router",
             "Fremkit\\Observers": "src/Fremkit/observers",
             "Fremkit\\Model": "src/Fremkit/model",
-            "Fremkit\\Controller": "src/Fremkit/controller",
+            "Fremkit\\Controller": "src/Fremkit/controller"
         }
     },
     "extra": {
