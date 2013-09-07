@@ -1,4 +1,4 @@
-<?php namespace Fremkit\Observers;
+<?php
 
 class OrderObserver extends MetaOrderObserver{
 

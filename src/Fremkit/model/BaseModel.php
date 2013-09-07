@@ -1,4 +1,4 @@
-<?php namespace Fremkit\Model;
+<?php
 
 /**
 *
