@@ -21,7 +21,7 @@ class ValidatorObserver
      *
      * @var array
      */
-    private $cleanDefaults = array('_token', '_method', 'password_confirmation', 'image', 'rpp');
+    private $cleanDefaults = array('_token', '_method', 'password_confirmation', 'image', 'video', 'rpp');
 
     /**
      * This method for the saving event is added to the event queue in filters.php
@@ -50,7 +50,6 @@ class ValidatorObserver
 
         // the the model attributes are valid, return true.
         if ($validator->passes()) {
-            //var_dump('xxx');exit();
             $this->cleanAttributes();
             $this->autoHash();
             return true;
@@ -120,9 +119,8 @@ class ValidatorObserver
         if (isset($this->model->autoHash) && is_array($this->model->autoHash)) {
             foreach($this->model->autoHash as $attr):
 
-                // We should only hash attributes in the model that have changed.
-                // We should ignore blank attributes - for example, the password may not have changed
-                // so we don't want to change it.
+                //Make this safer?
+
                 //var_dump($this->model->getOriginal($attr));
                 //var_dump($this->model->$attr);exit();
 

@@ -25,7 +25,7 @@ class HasOneImageObserver {
 			if(isset($model->id) && !empty($model->id)){
 				$image['imageable_id'] = $model->id;
 			}else{
-				$image['imageable_id'] = DB::table($model->table)->count() + 1;
+				$image['imageable_id'] = DB::table($model->getTable())->count() + 1;
 			}
 
 			//THIS 2 line shit works!!!!!
