@@ -6,7 +6,7 @@
 *
 **/
 
-class ResourceController extends Controller {
+class ResourceController extends Illuminate\Routing\Controllers\Controller; {
 
 	/**
 	*	The default configuration
