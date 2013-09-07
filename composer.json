@@ -13,7 +13,9 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.3.0",
+        "laravel/framework": "4.0.*",
+        "mews/purifier": "dev-master"
     },
     "require-dev": {
     },
@@ -21,10 +23,10 @@
     },
     "autoload": {
         "psr-0": {
-            "Fremkit\\Router": "src/Fremkit/router",
-            "Fremkit\\Observers": "src/Fremkit/observers",
-            "Fremkit\\Model": "src/Fremkit/model",
-            "Fremkit\\Controller": "src/Fremkit/controller"
+            "Fremkit\\Router\\": "src/Fremkit/router/",
+            "Fremkit\\Observers\\": "src/Fremkit/observers/",
+            "Fremkit\\Model\\": "src/Fremkit/model/",
+            "Fremkit\\Controller\\": "src/Fremkit/controller/"
         }
     },
     "extra": {
