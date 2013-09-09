@@ -78,8 +78,6 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
 		$this->_model = $this->config['model']['base']['name'];
 	}
 
-	public function kill(){die('kill');}
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -247,7 +245,35 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
 		if(Request::ajax()){
 			return $this->toJson($this->success(), $message, array());
 		}else{
-			return $this->toIndex($message);
+			return $this->toLast($message);
+		}
+
+	}
+
+	/**
+	 * Remove the specified resource from storage - without fucking around with fake methods
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function kill($id)
+	{
+
+		$item = $this->getItem($id);
+
+		$this->_success[] = $item->delete() === true ? true:false;
+
+		//The undelete URL
+		$undo = ' <a href="'.URL::action(get_class($this).'@undelete', $id).'">Undo</a>';
+
+		//The message to display
+		$message = $this->getMessage($this->success(), 'delete', $id, $undo);
+
+		//The response
+		if(Request::ajax()){
+			return $this->toJson($this->success(), $message, array());
+		}else{
+			return $this->toLast($message);
 		}
 
 	}
@@ -274,16 +300,10 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
 		if(Request::ajax()){
 			return $this->toJson($this->success(), $message, $item->toArray());
 		}else{
-
-			if($this->success()){
-				return Redirect::action(get_class($this).'@index')->with('flash_success', $message );
-			}else{
-				return Redirect::action(get_class($this).'@index')->with('flash_error', $message );
-			}
+			return $this->toLast($message);
 		}
 
 	}
-
 
 	/**
 	 * Move one item up intelligently (column name: order).
@@ -325,10 +345,12 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
         	$this->_success[] = false;
         }
 
-	    if($this->success()){
-			return Redirect::action(get_class($this).'@index')->with('flash_success', $this->getMessage(true, 'up') );
+        $message = $this->getMessage($this->success(), 'up', $id);
+
+        if(Request::ajax()){
+			return $this->toJson($this->success(), $message, $item->toArray());
 		}else{
-			return Redirect::action(get_class($this).'@index')->with('flash_error', $this->getMessage(false, 'up') );
+			return $this->toLast($message);
 		}
 
     }
@@ -374,10 +396,12 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
         	$this->_success[] = false;
         }
 
-        if($this->success()){
-			return Redirect::action(get_class($this).'@index')->with('flash_success', $this->getMessage(true, 'down') );
+        $message = $this->getMessage($this->success(), 'down', $id);
+
+        if(Request::ajax()){
+			return $this->toJson($this->success(), $message, $item->toArray());
 		}else{
-			return Redirect::action(get_class($this).'@index')->with('flash_error', $this->getMessage(false, 'down') );
+			return $this->toLast($message);
 		}
 
     }
@@ -402,12 +426,7 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
 		if(Request::ajax()){
 			return $this->toJson($this->success(), $message, $item->toArray());
 		}else{
-			
-			if($this->success()){
-				return Redirect::action(get_class($this).'@index')->with('flash_success', $message );
-			}else{
-				return Redirect::action(get_class($this).'@index', array( $item->getKey() ) )->withErrors($item->errors)->withInput();
-			}
+			return $this->toLast($message);
 		}
 	}
 
@@ -431,12 +450,7 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
 		if(Request::ajax()){
 			return $this->toJson($this->success(), $message, $item->toArray());
 		}else{
-			
-			if($this->success()){
-				return Redirect::action(get_class($this).'@index')->with('flash_success', $message );
-			}else{
-				return Redirect::action(get_class($this).'@index', array( $item->getKey() ) )->withErrors($item->errors)->withInput();
-			}
+			return $this->toLast($message);
 		}
 	}
 
@@ -539,6 +553,22 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
 			return Redirect::action(get_class($this).'@index')->with('flash_success', $message );
 		}else{
 			return Redirect::action(get_class($this).'@index')->with('flash_error', $message );
+		}
+		
+	}
+
+	/**
+	 * Back to the last page
+	 *
+	 * @param  string  $message
+	 * @return Response
+	 */
+	protected function toLast($message)
+	{
+		if($this->success()){
+			return Redirect::back()->with('flash_success', $message );
+		}else{
+			return Redirect::back()->with('flash_error', $message );
 		}
 		
 	}

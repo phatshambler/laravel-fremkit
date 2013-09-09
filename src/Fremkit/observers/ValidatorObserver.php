@@ -119,7 +119,7 @@ class ValidatorObserver
         if (isset($this->model->autoHash) && is_array($this->model->autoHash)) {
             foreach($this->model->autoHash as $attr):
 
-                //Make this safer?
+                //Make this safer? it doesn't work exactly like it used to...
 
                 //var_dump($this->model->getOriginal($attr));
                 //var_dump($this->model->$attr);exit();

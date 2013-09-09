@@ -20,6 +20,11 @@ class HasManyImagesObserver {
 
 			Input::file('image')->move($destinationPath, $image['filename']);
 
+			//Get the image data
+			$metadata = getimagesize($destinationPath.$image['filename']);
+			$image['width'] = $metadata[0];
+			$image['height'] = $metadata[1];
+
 			$image['imageable_type'] = get_class($model);
 
 			if(isset($model->id) && !empty($model->id)){
