@@ -42,6 +42,7 @@ class HasMultiDualImageObserver extends MetaMorphCatOrderObserver{
 
         	for($i = 0; $i < count($input); $i++){
 
+                $old_one = array();
                 //Try to find the onld one
                 if(!is_null($model->id)){
                     $old_one = $saving_model::where($this->id, $model->id)
@@ -51,7 +52,7 @@ class HasMultiDualImageObserver extends MetaMorphCatOrderObserver{
                     ->first();
                 }
 
-                if( is_null($old_one) ){
+                if( !isset($old_one) || empty($old_one) || is_null($old_one) ){
                     $old_one = array();
                 }else{
                     $old_one = $old_one->toArray();

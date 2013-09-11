@@ -8,7 +8,13 @@ class OrderReverseObserver extends MetaOrderObserver {
     	if( is_null($model->id) ){
 
     		$reflect = get_class($model);
-    		$reflect::increment('order');
+
+    		$items = $reflect::where('order', 1);
+
+    		if(is_null($items)){
+    			$reflect::increment('order');
+    		}
+
     		$model->order = 1;
 
     	}
