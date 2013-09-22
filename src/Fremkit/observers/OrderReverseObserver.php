@@ -9,12 +9,12 @@ class OrderReverseObserver extends MetaOrderObserver {
 
     		$reflect = get_class($model);
 
-    		$item = $reflect::getOneByOrder(1);
+    		$item = $reflect::getOneByOrder(1, $model);
 
             $i = 1;
     		if( is_null($item) ){
     			//$reflect::increment('order');
-                $items = $refleft::getOrderItems();
+                $items = $refleft::getOrderItems($model);
 
                 foreach($items as $it){
                     if($it->order == $i){

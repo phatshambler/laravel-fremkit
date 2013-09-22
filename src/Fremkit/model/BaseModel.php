@@ -76,42 +76,42 @@ class BaseModel extends \Illuminate\Database\Eloquent\Model
      */
 
     //For index
-    public static function getAll($options = array()){
+    public static function getAll($parent = null, $options = array()){
         return static::paginate(static::$rpp);
     }
 
     //For index/ajax
-    public static function getAllAjax($options = array()){
+    public static function getAllAjax($parent = null, $options = array()){
         return static::all();
     }
 
     //Trashed
-    public static function getTrashed($options = array()){
+    public static function getTrashed($parent = null, $options = array()){
         return static::onlyTrashed()->get();
     }
 
     //Most things
-    public static function getOne($id, $options = array()){
+    public static function getOne($id, $parent = null, $options = array()){
         return static::find($id);
     }
 
     //Undelete
-    public static function getOneTrashed($id, $options = array()){
+    public static function getOneTrashed($id, $parent = null, $options = array()){
         return static::withTrashed()->find($id);
     }
 
     //Up and down the orders
-    public static function getOrderCount($options = array()){
+    public static function getOrderCount($parent = null, $options = array()){
         return static::count();
     }
 
     //Get the items for a sub-category
-    public static function getOrderItems($options = array()){
+    public static function getOrderItems($parent = null, $options = array()){
         return static::all();
     }
 
     //Get/modify an order
-    public static function getOneByOrder($order, $options = array()){
+    public static function getOneByOrder($order, $parent = null, $options = array()){
         return static::where('order', $order)->first();
     }
 

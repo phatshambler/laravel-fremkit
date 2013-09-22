@@ -9,8 +9,8 @@ class OrderObserver extends MetaOrderObserver{
 
     		$reflect = get_class($model);
 
-    		$count = $reflect::getOrderCount();
-    		
+    		$count = $reflect::getOrderCount($model);
+
     		$model->order = $count + 1;
     	}
     }
