@@ -338,6 +338,10 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
                 $item->order = $target;
                 $item->save();
                 
+            }elseif($item->order < 1){
+            	$model::increment('order');
+            	$item->order = 1;
+                $item->save();
             }else{
         		$this->_success[] = false;
         	}
@@ -389,9 +393,13 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
 
                 $this->_success[] = true;
 
+            }elseif($item->order > $count){
+            	$item->order = $count;
+                $item->save();
             }else{
-            	$this->_success[] = false;
-            }
+        		$this->_success[] = false;
+        	}
+        	
         }else{
         	$this->_success[] = false;
         }

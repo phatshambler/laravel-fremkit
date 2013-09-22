@@ -6,7 +6,11 @@ class OrderObserver extends MetaOrderObserver{
     public function saving($model)
     {	
     	if( is_null($model->id) ){
-    		$count = DB::table( $model->getTable() )->count();
+
+    		$reflect = get_class($model);
+
+    		$count = $reflect::getOrderCount();
+    		
     		$model->order = $count + 1;
     	}
     }

@@ -9,10 +9,19 @@ class OrderReverseObserver extends MetaOrderObserver {
 
     		$reflect = get_class($model);
 
-    		$items = $reflect::where('order', 1);
+    		$item = $reflect::getOneByOrder(1);
 
-    		if(is_null($items)){
-    			$reflect::increment('order');
+            $i = 1;
+    		if( is_null($item) ){
+    			//$reflect::increment('order');
+                $items = $refleft::getOrderItems();
+
+                foreach($items as $it){
+                    if($it->order == $i){
+                        $it->order = $i + 1;
+                    }
+                    $i++;
+                }
     		}
 
     		$model->order = 1;

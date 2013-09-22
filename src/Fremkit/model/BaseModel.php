@@ -105,6 +105,11 @@ class BaseModel extends \Illuminate\Database\Eloquent\Model
         return static::count();
     }
 
+    //Get the items for a sub-category
+    public static function getOrderItems($options = array()){
+        return static::all();
+    }
+
     //Get/modify an order
     public static function getOneByOrder($order, $options = array()){
         return static::where('order', $order)->first();
