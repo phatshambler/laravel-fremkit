@@ -317,7 +317,7 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
 
         $item = $model::getOne($id);
 
-        $count = $model::getOrderCount();
+        $count = $model::getOrderCount($item);
 
         if ( !is_null($item->order) ){
 
@@ -327,7 +327,7 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
                 $target = $item->order - 1;
 
                 //Change the other one
-                $other = $model::getOneByOrder($target);
+                $other = $model::getOneByOrder($target, $item);
 
                 if( isset($other) && !empty($other) ){
                 	$other->order = $item->order;
@@ -371,7 +371,7 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
 
         $item = $model::getOne($id);
 
-        $count = $model::getOrderCount();
+        $count = $model::getOrderCount($item);
 
         if ( !is_null($item->order) ){
 
@@ -381,7 +381,7 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
                 $target = $item->order + 1;
 
                 //Change if there's another one
-                $other = $model::getOneByOrder($target);
+                $other = $model::getOneByOrder($target, $item);
                 if( isset($other) && !empty($other) ){
                 	$other->order = $item->order;
                 	$other->save();
