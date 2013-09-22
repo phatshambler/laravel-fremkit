@@ -399,7 +399,7 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
             }else{
         		$this->_success[] = false;
         	}
-        	
+
         }else{
         	$this->_success[] = false;
         }
@@ -453,7 +453,7 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
 		//Update is good and saves automatically
 		$this->_success[] = $item->update( array('active' => 0) ) === true ? true:false;
 
-		$message = $this->getMessage($this->success(), 'activate', $id);
+		$message = $this->getMessage($this->success(), 'deactivate', $id);
 
 		if(Request::ajax()){
 			return $this->toJson($this->success(), $message, $item->toArray());
