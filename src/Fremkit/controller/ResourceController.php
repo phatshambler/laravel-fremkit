@@ -484,10 +484,12 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
 
     		if($item->order != $i){
     			$this->autoSort($items);
-    			break;
+    			return false;
     		}
     		$i++;
     	}
+
+    	return true;
     }
 
     protected function autoSort($items){

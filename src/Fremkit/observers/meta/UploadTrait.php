@@ -20,10 +20,12 @@ trait UploadTrait{
 
 		$input->move($destinationPath, $image['filename'.$suffix]);
 
-		//Get the image data
-		$metadata = getimagesize($destinationPath.$image['filename'.$suffix]);
-		$image['width'.$suffix] = $metadata[0];
-		$image['height'.$suffix] = $metadata[1];
+		//Get the image data if it's an image
+		if( in_array(strtolower($image['ext'.$suffix]), array('png', 'jpeg', 'jpg', 'gif')) ){
+			$metadata = getimagesize($destinationPath.$image['filename'.$suffix]);
+			$image['width'.$suffix] = $metadata[0];
+			$image['height'.$suffix] = $metadata[1];
+		}
 
     	return $image;
     }
