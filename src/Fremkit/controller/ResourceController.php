@@ -345,6 +345,9 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
             }else{
         		$this->_success[] = false;
         	}
+
+        	$this->testSort($item);
+
         }else{
         	$this->_success[] = false;
         }
@@ -399,6 +402,8 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
             }else{
         		$this->_success[] = false;
         	}
+
+        	$this->testSort($item);
 
         }else{
         	$this->_success[] = false;
@@ -461,6 +466,38 @@ class ResourceController extends \Illuminate\Routing\Controllers\Controller {
 			return $this->toLast($message);
 		}
 	}
+
+	/**
+	 * Checks for sorting after up and down
+	 *
+	 * @param  Eloquent model $item
+	 * @return void
+	 */
+    protected function testSort($item){
+
+    	$model = $this->_model;
+
+    	$items = $model::getOrderItems($item);
+
+    	$i = 1;
+    	foreach($items as $item){
+
+    		if($item->order != $i){
+    			$this->autoSort($items);
+    			break;
+    		}
+    		$i++;
+    	}
+    }
+
+    protected function autoSort($items){
+    	$i = 1;
+    	foreach($items as $item){
+    		$item->order = $i;
+    		$item->save();
+    		$i++;
+    	}
+    }
 
 	/**
 	 * Checks for csrf

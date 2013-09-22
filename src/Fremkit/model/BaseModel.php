@@ -107,7 +107,7 @@ class BaseModel extends \Illuminate\Database\Eloquent\Model
 
     //Get the items for a sub-category
     public static function getOrderItems($parent = null, $options = array()){
-        return static::all();
+        return static::orderBy('order', 'asc')->get();
     }
 
     //Get/modify an order
