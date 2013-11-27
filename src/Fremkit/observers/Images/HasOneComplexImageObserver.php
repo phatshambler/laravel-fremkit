@@ -2,8 +2,7 @@
 
 //Has multiple versions of one image (multi-lingual for instance) and handles array uploading
 
-class HasMultiComplexImageObserver extends MetaMorphCatOrderObserver{
-	use UploadTrait;
+class HasOneComplexImageObserver extends MetaImageObserver{
 
 	protected $fieldName = 'banner';
 	protected $functionName = 'bannerable';
@@ -23,10 +22,6 @@ class HasMultiComplexImageObserver extends MetaMorphCatOrderObserver{
         	if(Input::has( $this->category )){
         		$cat = Input::get( $this->category );
         	}
-
-            if(Input::has( $this->order )){
-                $order = Input::get( $this->order );
-            }
         	
         	if(!is_array($input)){
         		$input = array( $input );
@@ -35,12 +30,6 @@ class HasMultiComplexImageObserver extends MetaMorphCatOrderObserver{
         	if(isset($cat) && !is_array($cat)){
         		$cat = array( $cat );
         	}
-
-            if(isset($order) && !is_array($order)){
-                $order = array( $order );
-            }
-
-            //var_dump($input, $cat, $order);exit();
 
         	for($i = 0; $i < count($input); $i++){
 
@@ -55,30 +44,18 @@ class HasMultiComplexImageObserver extends MetaMorphCatOrderObserver{
 
         		if(isset($cat) && isset($cat[$i]) && !empty($cat[$i])){
         			
+        			//Clear before setting the order
+        			$this->clear( $image, $cat[$i] );
+
         			$image = $this->setCategory($image, $cat[$i]);
-
-                    if(isset($order) && isset($order[$i]) && !empty($order[$i])){
-
-                        //var_dump($image, $cat[$i], $order[$i]);exit();
-
-                        $this->clear( $image, $cat[$i], $order[$i] );
-                        $image = $this->setOrder($image, $cat[$i], $order[$i]);
-
-                    }else{
-
-                        $image = $this->setOrder($image, $cat[$i]);
-                    }
+        			$image = $this->setOrder($image, $cat[$i]);
 
         		}else{
 
-        			if(isset($order) && isset($order[$i]) && !empty($order[$i])){
-                        
-                        $this->clear( $image, '', $order[$i] );
-                        $image = $this->setOrder( $image, '', $order[$i] );
-
-                    }else{
-                        $image = $this->setOrder( $image );
-                    }
+        			//Clear before setting the order
+        			$this->clear( $image );
+        			
+        			$image = $this->setOrder( $image );
         			
         		}
 

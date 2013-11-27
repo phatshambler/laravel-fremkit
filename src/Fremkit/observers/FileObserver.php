@@ -2,15 +2,15 @@
 
 //Has multiple versions of one image (multi-lingual for instance) and handles array uploading
 
-class HasOneComplexImageObserver extends MetaMorphCatOrderObserver{
-	use UploadTrait;
+class FileObserver extends MetaImageObserver{
 
-	protected $fieldName = 'banner';
-	protected $functionName = 'bannerable';
+	protected $fieldName = 'file';
+	protected $functionName = 'fileable';
 
-    protected $imageModel = 'Image';
-	protected $imageTable = 'images';
+    protected $imageModel = 'File';
+	protected $imageTable = 'files';
 	protected $imagePrimary = 'id';
+    protected $imageFolder = '/files/';
 
     public function saving($model)
     {
@@ -38,7 +38,7 @@ class HasOneComplexImageObserver extends MetaMorphCatOrderObserver{
         		if(is_null($input[$i])) continue;
 
         		//Upload the file and get it's properties
-        		$image = $this->upload( $input[$i] );
+        		$image = $this->upload( $input[$i], array(), $this->imageFolder );
 
         		//Set it's type and id
         		$image = $this->setTypeAndId( $image, $model );

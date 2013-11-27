@@ -2,8 +2,7 @@
 
 //Has multiple versions of one image (multi-lingual for instance) and handles array uploading
 
-class HasMultiDualImageObserver extends MetaMorphCatOrderObserver{
-	use UploadTrait;
+class HasMultiDualImageObserver extends MetaImageObserver{
 
 	protected $fieldName = 'dual_image';
 	protected $functionName = 'dual_imageable';
@@ -29,14 +28,13 @@ class HasMultiDualImageObserver extends MetaMorphCatOrderObserver{
     {
     	$saving_model = $this->imageModel;
 
-        if ( Input::hasFile( $this->fieldName ) || Input::hasFile( $this->altFieldName ) ){
+        //The arrays
+        $input = Input::file( $this->fieldName );
+        $input_alt = Input::file( $this->altFieldName );
 
-            //The arrays
-        	$input = Input::file( $this->fieldName );
-            $input_alt = Input::file( $this->altFieldName );
+        if ( ( !is_null($input) && !empty($input) ) || ( !is_null($input_alt) && !empty($input_alt) ) ){
 
             //var_dump($input)
-
         	$cat = Input::get( $this->category );
             $order = Input::get( $this->order );
 
