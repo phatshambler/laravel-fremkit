@@ -18,7 +18,8 @@ class RouterServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['router'] = $this->app->share(function() { return new CustomRouter($this->app); });
+		$self = $this;
+		$this->app['router'] = $this->app->share(function() { return new CustomRouter($self->app); });
 	}
 
 	/**
