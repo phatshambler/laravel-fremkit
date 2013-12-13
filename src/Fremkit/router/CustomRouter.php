@@ -12,46 +12,46 @@ class CustomRouter extends \Illuminate\Routing\Router {
      * @param  string  $controller
      * @return void
      */
-    protected function addResourceUndelete($name, $base, $controller)
+    protected function addResourceUndelete($name, $base, $controller, $options)
     {
         $uri = $this->getResourceUri($name).'/{'.$base.'}/undelete';
 
-        return $this->get($uri, $this->getResourceAction($name, $controller, 'undelete'));
+        return $this->get($uri, $this->getResourceAction($name, $controller, 'undelete', $options));
     }
 
-    protected function addResourceUp($name, $base, $controller)
+    protected function addResourceUp($name, $base, $controller, $options)
     {
         $uri = $this->getResourceUri($name).'/{'.$base.'}/up';
 
-        return $this->get($uri, $this->getResourceAction($name, $controller, 'up'));
+        return $this->get($uri, $this->getResourceAction($name, $controller, 'up', $options));
     }
 
-    protected function addResourceDown($name, $base, $controller)
+    protected function addResourceDown($name, $base, $controller, $options)
     {
         $uri = $this->getResourceUri($name).'/{'.$base.'}/down';
 
-        return $this->get($uri, $this->getResourceAction($name, $controller, 'down'));
+        return $this->get($uri, $this->getResourceAction($name, $controller, 'down', $options));
     }
 
-    protected function addResourceActivate($name, $base, $controller)
+    protected function addResourceActivate($name, $base, $controller, $options)
     {
         $uri = $this->getResourceUri($name).'/{'.$base.'}/activate';
 
-        return $this->get($uri, $this->getResourceAction($name, $controller, 'activate'));
+        return $this->get($uri, $this->getResourceAction($name, $controller, 'activate', $options));
     }
 
-    protected function addResourceDeactivate($name, $base, $controller)
+    protected function addResourceDeactivate($name, $base, $controller, $options)
     {
         $uri = $this->getResourceUri($name).'/{'.$base.'}/deactivate';
 
-        return $this->get($uri, $this->getResourceAction($name, $controller, 'deactivate'));
+        return $this->get($uri, $this->getResourceAction($name, $controller, 'deactivate', $options));
     }
 
-    protected function addResourceKill($name, $base, $controller)
+    protected function addResourceKill($name, $base, $controller, $options)
     {
         $uri = $this->getResourceUri($name).'/{'.$base.'}/kill';
 
-        return $this->get($uri, $this->getResourceAction($name, $controller, 'kill'));
+        return $this->get($uri, $this->getResourceAction($name, $controller, 'kill', $options));
     }
 
 }
