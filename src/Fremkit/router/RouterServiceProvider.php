@@ -18,11 +18,17 @@ class RouterServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//$this->app['router'] = $this->app->share(function() { return new CustomRouter($this->app); });
+
+		/*$this->app['router'] = $this->app->share(function($app)
+		{
+			$router = new CustomRouter($app);
+
+			return $router;
+		});*/
 
 		$this->app['router'] = $this->app->share(function($app)
 		{
-			$router = new CustomRouter($app);
+			$router = new CustomRouter($app['events'], $app);
 
 			// If the current application environment is "testing", we will disable the
 			// routing filters, since they can be tested independently of the routes
